@@ -105,6 +105,9 @@ hr {
     hr {
         margin: 10px auto;
     }
+    body {
+        background: rgba(110, 110, 110, 0.1);
+    }
 
     .completed {
         width: 100%;
@@ -119,17 +122,25 @@ hr {
         margin-top: 5px;
         height: 400px;
         overflow: scroll;
+        background: white;
     }
     
     .toDoList ul h2 {
+        position: sticky;
+        background: white;
+        top: 0;
         width: 300px;
         margin-top: 5px;
     
         text-align: center;
         font-size: 25px;
+
+        z-index: 2;
     }
 
     .toDoList hr {    
+        width: 100%;
         margin: 10px auto;
+        
     }
 }
