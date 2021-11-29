@@ -116,7 +116,9 @@ hr {
     }
 
     .toDoList ul {        
-        margin-top: 5px;    
+        margin-top: 5px;
+        height: 400px;
+        overflow: scroll;
     }
     
     .toDoList ul h2 {
