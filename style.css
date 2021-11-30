@@ -20,7 +20,17 @@ hr {
     margin: 25px auto;
 }
 
-.completed {
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+
+
+}
+.add, 
+.completed,
+form button {
     display: block;
     margin: 20px auto;
     width: 200px;
@@ -97,6 +107,62 @@ hr {
     display: none;
 }
 
+/* css addTask section */
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    width: 25%;
+
+    font-size: 18px;
+}
+
+form div input{ 
+    
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Cutive Mono', monospace;
+}
+
+form .add-text {
+
+   width: 75%;
+   
+}
+
+.add-text textarea{
+    resize: vertical;
+    height: 300px;
+    font-size: 20px;
+    font-family: 'Cutive Mono', monospace;
+}
+
+form .priority{
+    width: 75%;
+    margin: 0 20px 20px;
+
+}
+
+form div select {
+    width: 35%;
+    height: 30px;
+    font-size: 18px;
+    font-family: 'Cutive Mono', monospace;
+}
+form button {
+    margin: 10px;
+}
+
+
 @media all and (max-width: 990px) {
     h1{
         font-size: 35px;
@@ -108,8 +174,9 @@ hr {
     body {
         background: rgba(110, 110, 110, 0.1);
     }
-
-    .completed {
+    .add, 
+    .completed,
+    form button {
         width: 100%;
         max-width: 100px;
         padding:5px;
@@ -117,6 +184,7 @@ hr {
         font-weight: bold;
         font-size: 18px;
     }
+    
 
     .toDoList ul {        
         margin-top: 5px;
