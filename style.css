@@ -282,7 +282,7 @@ form button {
     justify-content: end;
     padding: 15px 30px;
 
-    position: fixed;
+    position: absolute;
     top:0px;
     font-size: 25px;
     font-weight: bold;
