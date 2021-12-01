@@ -12,17 +12,49 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cutive+Mono&display=swap"
         rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 </head>
 
 <body>
-    <h1> Priority</h1>
-    <hr>
-    <div class="btns">
-        <button class="completed">COMPLETED TASKS</button>
-        <button class="add">ADD NEW APPT.</button>
+    <div class="project">
+        <!-- <div class="log">
+            <img src="https://img.icons8.com/windows/32/000000/popular-man.png"/>
+            <p class="login"></p>
+            <button class="logout">LOG OUT<button>
+        </div> -->
+        
+        <h1> Priority</h1>
+        <hr>
+        <div class="btns">
+            <button class="completed">COMPLETED TASKS</button>
+            <button class="add">ADD NEW APPT.</button>
+        </div>
+
+        <div class="toDoList">
+        </div>
     </div>
-    
-    <div class="toDoList">
+    <div class="modaleCredential">
+        <div class="modaleUserPsw">
+            <div class="UserPsw animate__animated">
+                <h2>
+                    Sign In
+                </h2>
+                <hr>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for="psw">Password</label>
+                <input type="password" id="psw" name="psw" required>
+                <button class="sign-in">Sign in</button>
+                <div class="saveCredential">
+                    <input type="checkbox" id="remember-me" name="remember-me" checked>
+                    <label for="remember-me">Remember me</label>
+                </div>
+                
+            </div>
+        </div>
     </div>
     <script src="./js/script.js" type="module"></script>
 </body>

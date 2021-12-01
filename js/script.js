@@ -1,5 +1,6 @@
-import { c, q, a, eraseDivContent} from "./basicFunction.js"
+import { c, q, a, eraseDivContent } from "./basicFunction.js"
 import { addTasks } from "./addTask.js";
+import { singInModale, signInUser, signIn } from "./logInOut.js"
 // FUNZIONI
 // chiamata fetch e aggiunta del valore "priority"
 
@@ -10,14 +11,13 @@ const getToDoList = async () => {
     toDoList = data.map((toDos) => {
         const nums = parseInt(Math.random() * (6 - 0))
         toDos.priority = nums;
-
         return toDos;
     });
 
-   
+
     filterPriority();
     filterCompleted();
-
+    
 };
 
 
@@ -45,11 +45,11 @@ const filterPriority = () => {
 
 const render = (arr, container) => {
     const toDoUl = a(toDoListDiv, c("ul"));
-    toDoUl.setAttribute("class", container );
-    const title = a (toDoUl, c("h2"))
+    toDoUl.setAttribute("class", container);
+    const title = a(toDoUl, c("h2"))
     title.textContent = container
     const hr = a(title, c("hr"))
-  
+
 
     arr.map((item) => {
         const toDo = a(toDoUl, c("li"));
@@ -75,12 +75,12 @@ const filterCompleted = () => {
             item.classList.toggle("hide")
         })
         console.log(completedBtn.textContent)
-        completedBtn.textContent === "COMPLETED TASKS" ? completedBtn.textContent = "SHOW ALL" 
-        : completedBtn.textContent = "COMPLETED TASKS";
+        completedBtn.textContent === "COMPLETED TASKS" ? completedBtn.textContent = "SHOW ALL"
+            : completedBtn.textContent = "COMPLETED TASKS";
     })
 }
 
-export { filterPriority, filterCompleted}
+export { filterPriority, filterCompleted }
 
 
 // INIZIALIZZAZIONE VARIABILI 
@@ -90,16 +90,30 @@ const completedBtn = q(".completed");
 const toDoListDiv = q(".toDoList");
 const btns = q(".btns")
 
-// funzione per la crazione dell'app
+// funzione per la crazione dell'app 
+document.addEventListener("DOMContentLoaded", () => {
+
 getToDoList();
+
+// aggiunta nuovo appuntamento codice ====> addTask.js
 
 const addTask = document.querySelector(".add")
 
-addTask.addEventListener('click', ()=> {
+addTask.addEventListener('click', () => {
     window.location.hash = "#add";
     btns.style.display = "none";
     addTasks(toDoListDiv, toDoList, btns);
 })
 
 
+// Modale d'accesso codice ==> logInOut.js
 
+if(localStorage.length>0){ 
+    signInUser(); }
+else {
+    singInModale();
+}
+
+signIn();
+
+});

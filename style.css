@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding:0;
@@ -5,20 +6,22 @@
 }
 
 body {
-
-     font-family: 'Amatic SC', cursive;
+    position: relative;
+    font-family: 'Amatic SC', cursive;
+    
 }
 
 h1{
     font-size: 60px;
     text-align: center ;
-    margin-top: 35px;
+    padding-top: 90px;
 }
 
 hr {
     width: 80%;
     margin: 25px auto;
 }
+
 
 .btns {
     display: flex;
@@ -28,6 +31,9 @@ hr {
 
 
 }
+
+
+
 .add, 
 .completed,
 form button {
@@ -37,6 +43,7 @@ form button {
 
     font-family: 'Amatic SC', cursive;
     font-size: 30px;
+    cursor: pointer;
 }
 
 
@@ -52,8 +59,10 @@ form button {
     max-width: 300px;
     
     margin: 30px;
-    border: 1px solid rgb(133, 133, 133);     
+    border: 1px solid rgb(133, 133, 133);  
+    border-radius: 2%;
 }
+
 
 .toDoList ul h2 {
     width: 300px;
@@ -149,6 +158,7 @@ form .add-text {
 form .priority{
     width: 75%;
     margin: 0 20px 20px;
+    
 
 }
 
@@ -157,15 +167,151 @@ form div select {
     height: 30px;
     font-size: 18px;
     font-family: 'Cutive Mono', monospace;
+    cursor: pointer;
 }
+
 form button {
     margin: 10px;
 }
 
+/* modale credenziali d'accesso */
 
+.modaleCredential {
+    position: absolute;
+    top:-100%;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.modaleUserPsw {
+    position: fixed;
+    display: block;
+    top:-100%;
+    margin: 0 auto;
+    width: 100%;
+    height: 300px;
+    transition: all 1s ease-in-out;
+    
+}
+
+.UserPsw {
+    
+    height: 250px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    
+    background-color: white; 
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px;
+
+}
+
+.UserPsw h2 {
+    width: 80%;
+    padding: 10px 0 0;   
+}
+
+.UserPsw hr{
+    width: 80%;
+    margin: 0 auto 10px; 
+}
+
+.UserPsw h2,
+.UserPsw input,
+.UserPsw label,
+.UserPsw button {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.UserPsw label{
+    font-size: 20px;
+    
+}
+
+.UserPsw input {
+    margin-bottom: 3px;
+    height: 30px;
+    font-family: 'Cutive Mono', monospace;
+    font-size: 18px;
+}
+
+.UserPsw button {
+    height: 30px;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    margin-top: 21px;
+    cursor: pointer;
+    
+}
+
+
+.saveCredential{
+    display: flex;
+    width: 80%;
+    margin: 5px auto;
+
+}
+.saveCredential input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    
+
+
+}
+
+.saveCredential label{
+    margin: 0;
+    padding-left: 3px;
+}
+
+/* log in  */
+
+.log {
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 61px;
+    justify-content: end;
+    padding: 15px 30px;
+
+    position: fixed;
+    top:0px;
+    font-size: 25px;
+    font-weight: bold;
+    background: rgb(175, 175, 175);
+    box-shadow: 1px 1px 3px rgb(78, 78, 78);
+    filter: invert(100%);
+    
+
+}
+.log img{
+    width: 25px;
+    height: 100%;
+    margin: 0 10px;
+
+}
+
+.log button {
+    border:none;
+    background: none;
+    cursor: pointer;
+
+}
+
+
+/* responsive */
 @media all and (max-width: 990px) {
     h1{
         font-size: 35px;
+        padding-top: 70px;
    }
     
     hr {
@@ -173,6 +319,10 @@ form button {
     }
     body {
         background: rgba(110, 110, 110, 0.1);
+    }
+
+    .log {
+        top:-5px;
     }
     .add, 
     .completed,
@@ -203,7 +353,7 @@ form button {
         text-align: center;
         font-size: 25px;
 
-        z-index: 2;
+        z-index: 1;
     }
 
     .toDoList hr {    
@@ -211,4 +361,7 @@ form button {
         margin: 10px auto;
         
     }
+
+    
+    
 }
