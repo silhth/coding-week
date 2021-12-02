@@ -13,28 +13,26 @@ const getToDoList = async () => {
         toDos.priority = nums;
         return toDos;
     });
-
-
-    filterPriority();
-    filterCompleted();
+    filterPriority(toDoList);
+    filterCompleted();   
     
 };
 
 
 
 // filtro l'array per i diversi intervalli di "priority" 
-const filterPriority = () => {
-    const higherPriority = toDoList.filter(items => {
+const filterPriority = (arrToDo) => {
+    const higherPriority = arrToDo.filter(items => {
         return items.priority >= 4
     })
     render(higherPriority, "higher-priority")
 
-    const highPriority = toDoList.filter(items => {
+    const highPriority = arrToDo.filter(items => {
         return items.priority >= 2 && items.priority <= 3
     });
     render(highPriority, "high-priority")
 
-    const lowPriority = toDoList.filter(items => {
+    const lowPriority = arrToDo.filter(items => {
         return items.priority >= 0 && items.priority <= 1
     });
     render(lowPriority, "low-priority")
@@ -62,38 +60,83 @@ const render = (arr, container) => {
         else { toDo.setAttribute("class", "unchecked") }
         toDo.textContent = item.title;
         a(toDo, checked);
+
+        const deleteImg = a(toDo, c("img"))
+        deleteImg.setAttribute("src","https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/50/000000/external-trash-bin-cleaning-kiranshastry-lineal-kiranshastry.png" )
+        
+        
+        deleteImg.addEventListener('click', ()=> {
+            eraseDivContent(divModale)
+            const h2Sure = a(divModale, c("h2"))
+            h2Sure.textContent= "are you sere?"
+            const btnNo =a(divModale, c("button"))
+            btnNo.textContent = "NO"
+            const btnYes =a(divModale, c("button"))
+            btnYes.textContent = "YES"
+            singInModale()
+            console.log(btnYes)
+            console.log(divModale.innerHTML)
+            btnYes.addEventListener('click', () => {
+
+                console.log("ciao")
+                const id = parseInt(item.id);
+                const doDoListRemove = toDoList.filter((item) => item.id !== id);
+                toDoList = doDoListRemove;
+                eraseDivContent(toDoListDiv)
+                filterPriority(doDoListRemove);
+                completedBtn.textContent = "SHOW ALL" ? completedBtn.textContent = "COMPLETED TASKS" : completedBtn.textContent = "COMPLETED TASKS"
+                project.style.filter = "blur(0px)";
+                modaleCredential.style.top = "-100%";
+                modaleUserPsw.style.top = "-100%"
+            })
+            btnNo.addEventListener("click", ()=> {
+                project.style.filter = "blur(0px)";
+                modaleCredential.style.top = "-100%";
+                modaleUserPsw.style.top = "-100%"
+            })
+        })
+            
+    
     });
+
+
 
 }
 
+
+
 // aggiunge la funzionalità show/hide task completate.
 const filterCompleted = () => {
-    const unchecked = document.querySelectorAll(".unchecked")
-
+    
     completedBtn.addEventListener("click", () => {
+        const unchecked = document.querySelectorAll(".unchecked")
         unchecked.forEach((item) => {
             item.classList.toggle("hide")
         })
-        console.log(completedBtn.textContent)
-        completedBtn.textContent === "COMPLETED TASKS" ? completedBtn.textContent = "SHOW ALL"
-            : completedBtn.textContent = "COMPLETED TASKS";
+        
+        unchecked[0].className === "unchecked hide" ? completedBtn.textContent = "SHOW ALL"
+        : completedBtn.textContent = "COMPLETED TASKS"
     })
+
 }
 
 export { filterPriority, filterCompleted }
 
 
 // INIZIALIZZAZIONE VARIABILI 
-
+const divModale = q(".UserPsw")
 let toDoList = []
 const completedBtn = q(".completed");
 const toDoListDiv = q(".toDoList");
 const btns = q(".btns")
-
+const modaleCredential = q(".modaleCredential")
+const project = q(".project")
+const modaleUserPsw = q(".modaleUserPsw")
 // funzione per la crazione dell'app 
 document.addEventListener("DOMContentLoaded", () => {
 
 getToDoList();
+
 
 // aggiunta nuovo appuntamento codice ====> addTask.js
 
@@ -117,3 +160,5 @@ else {
 signIn();
 
 });
+
+
