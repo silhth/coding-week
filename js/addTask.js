@@ -4,7 +4,7 @@ import { filterPriority, filterCompleted} from "./script.js"
 
 const addTasks = (container, array, btns) => {
     eraseDivContent(container);
-    
+   
     // creo gli elementi nel div 
 
     const form = a(container, c("form"))
@@ -79,13 +79,13 @@ const addTasks = (container, array, btns) => {
 
     btnSave.addEventListener('click', () =>{
         let newTask = {
+            id: array.length + 1,
             name: inputName.value,
             lastname: inputLastname.value,
             age: inputAge.value,
             title: inputText.value,
             priority: selectLabel.value
         }
-        console.log(array)
         if (newTask.title && newTask.lastname && newTask.name) {array.unshift(newTask)}
         else {alert("Please fill all the mandatory* fields")};
 
@@ -96,7 +96,7 @@ const addTasks = (container, array, btns) => {
     btnBack.addEventListener('click', () =>{ 
         eraseDivContent(container);
         window.location.hash = "";  
-        filterPriority();
+        filterPriority(array);
         filterCompleted();
 
         btns.style.display = "flex";
