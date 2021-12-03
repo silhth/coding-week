@@ -1,5 +1,5 @@
 import { c, q, a, eraseDivContent } from "./basicFunction.js"
-import { addTasks, addTaskBtn } from "./addTask.js";
+import { addTaskBtn } from "./addTask.js";
 import { modale, signInUser, signInHtml } from "./logInOut.js"
 import { modaleHtmlDelete } from "./deleteListItem.js"
 import { searchItem } from "./search.js"
