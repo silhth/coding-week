@@ -83,7 +83,6 @@ const render = (arr, container) => {
 
         const deleteImg = a(toDo, c("img"))
         deleteImg.setAttribute("src", "img/bin.png")
-        // deleteImg.setAttribute("src", "https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/50/000000/external-trash-bin-cleaning-kiranshastry-lineal-kiranshastry.png")
         deleteImg.setAttribute("alt", "delete")
 
         deleteImg.addEventListener('click', () => {

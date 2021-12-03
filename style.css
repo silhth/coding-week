@@ -8,6 +8,7 @@
 body {
     position: relative;
     font-family: 'Amatic SC', cursive;
+    min-height: 100vh;
     
 }
 
@@ -138,12 +139,12 @@ form button {
     position: absolute;
     right: -20px;
     bottom: 0px;
-    padding: 2px;
+    padding: 5px;
 
     margin: 5px;
     width: 30px;
     background: rgb(218, 122, 122);
-    border-radius: 4px;
+    border-radius: 50%;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 
     filter: invert(100%);
@@ -252,10 +253,7 @@ form button {
     max-width: 350px;
     margin: 0 auto;
     
-    /* background-color: white;  */
     border-radius: 10px;
-    /* box-shadow: 2px 2px 2px; */
-
 }
 
 .UserPsw h2 {
@@ -348,11 +346,6 @@ form button {
 
 }
 
-.log .logInName{
-    padding-left: 10px;
-    /* font-size: 22px; */
-    /* font-family: 'Amatic SC', cursive; */
-}
 .log img{
     width: 25px;
     height: 100%;
@@ -365,6 +358,9 @@ form button {
 }
 
 footer {
+    position: fixed;
+    bottom:0;
+    width: 100%;
     background: rgb(70, 70, 70);
     padding: 50px 50px;
     text-align: center;
