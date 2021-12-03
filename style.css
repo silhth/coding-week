@@ -19,17 +19,43 @@ h1{
 
 hr {
     width: 80%;
-    margin: 25px auto;
+    margin: 25px auto 0;
 }
 
+.searchitems{
+    width: 80%;
+    margin: 0 auto}
+
+.searchitems label{
+    display: block;
+    font-size: 25px;
+    padding-left: 45px;
+}
+
+.searchitems div {
+    display: flex;
+}
+
+.searchitems img {
+    padding: 5px;
+    width: 40px;
+    height: 100%;
+   
+    
+}
+
+.searchitems input{
+    height: 40px;
+    font-family: 'Cutive Mono', monospace;
+    font-size: 18px;
+}
 
 .btns {
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 20px;
-
-
+    margin: 20px auto;
 }
 
 
@@ -226,9 +252,9 @@ form button {
     max-width: 350px;
     margin: 0 auto;
     
-    background-color: white; 
+    /* background-color: white;  */
     border-radius: 10px;
-    box-shadow: 2px 2px 2px;
+    /* box-shadow: 2px 2px 2px; */
 
 }
 
@@ -298,6 +324,7 @@ form button {
 .log {
     display: flex;
     width: 100%;
+    align-items: center;
     height: auto;
     min-height: 61px;
     justify-content: end;
@@ -305,7 +332,7 @@ form button {
 
     position: absolute;
     top:0px;
-    font-size: 25px;
+    font-size: 16px;
     font-weight: bold;
     background: rgb(175, 175, 175);
     box-shadow: 1px 1px 3px rgb(78, 78, 78);
@@ -313,20 +340,37 @@ form button {
     
 
 }
+
+.log p {
+    
+    font-family: 'Cutive Mono', monospace
+
+
+}
+
+.log .logInName{
+    padding-left: 10px;
+    /* font-size: 22px; */
+    /* font-family: 'Amatic SC', cursive; */
+}
 .log img{
     width: 25px;
     height: 100%;
     margin: 0 10px;
+    
 
 }
-
-.log button {
-    border:none;
-    background: none;
+.log .log-out{
     cursor: pointer;
-
 }
 
+footer {
+    background: rgb(70, 70, 70);
+    padding: 50px 50px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
 
 /* responsive */
 @media all and (max-width: 990px) {
@@ -381,6 +425,11 @@ form button {
         width: 100%;
         margin: 10px auto;
         
+    }
+
+    footer {
+        padding: 50px 10px;
+        font-size: 18px;
     }
 
     

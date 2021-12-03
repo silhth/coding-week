@@ -1,8 +1,8 @@
-import { c, q, a, eraseDivContent} from "./basicFunction.js"
-import { filterPriority, filterCompleted} from "./script.js"
+import { c, a, eraseDivContent} from "./basicFunction.js"
+import { filterPriority } from "./script.js"
 
 
-const addTasks = (container, array, btns) => {
+const addTasks = (container, array, btns, searchBar) => {
     eraseDivContent(container);
    
     // creo gli elementi nel div 
@@ -85,23 +85,33 @@ const addTasks = (container, array, btns) => {
             age: inputAge.value,
             title: inputText.value,
             priority: selectLabel.value
+
         }
         if (newTask.title && newTask.lastname && newTask.name) {array.unshift(newTask)}
         else {alert("Please fill all the mandatory* fields")};
 
     })
 
-
-
     btnBack.addEventListener('click', () =>{ 
         eraseDivContent(container);
         window.location.hash = "";  
         filterPriority(array);
-        filterCompleted();
-
         btns.style.display = "flex";
+        searchBar.style.display = "block";
     });
 
 };
 
-export { addTasks }
+const addTask = document.querySelector(".add")
+
+const addTaskBtn = (btns, searchBar, container, array) =>{
+    addTask.addEventListener('click', () => {
+        window.location.hash = "#add";
+        btns.style.display = "none";
+        searchBar.style.display = "none";
+        addTasks(container, array, btns, searchBar);
+})
+}
+
+
+export { addTasks, addTaskBtn }

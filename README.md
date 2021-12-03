@@ -15,4 +15,4 @@ il progetto è stato realizzato con:
 
 I dati provengono da un [server remoto](https://jsonplaceholder.typicode.com/todos) in formato JSON, e rappresentano la lista delle tasks. 
 
-Cliccando sul pulsante è possibile visualizzare le tasks già completate oppure tutte le tasks. 
+ ### [>>> Live Demo](https://silhth.github.io/coding-week/)
