@@ -108,25 +108,18 @@ const signInUser = () => {
     log.setAttribute("class", "log");
     const logImg = a(log, c('img'));
     logImg.setAttribute("src", "img/popular-man.png");
-    // logImg.setAttribute("src", "https://img.icons8.com/windows/32/000000/popular-man.png");
     logImg.setAttribute( "alt", "log-in image");
 
     const logP = a(log, c("p"));
     logP.setAttribute('class', 'login')
-    logP.textContent = "Hi"
-
-    const logPName = a(log, c("p"));
-    logPName.setAttribute('class', 'logInName')
-    logPName.textContent = "ciao"
     
     if (localStorage.length>0) 
-    {logPName.textContent =  localStorage.getItem('myUsername')}
-    else {logPName.textContent = username.value}
+    {logP.textContent =  `Hi ${localStorage.getItem('myUsername')}`}
+    else {logP.textContent = `Hi ${username.value}`}
 
     const logImgBtn = a(log, c('img'));
     logImgBtn.setAttribute("class", "log-out")
     logImgBtn.setAttribute("src", "img/log-out.png");
-    // logImgBtn.setAttribute("src", "https://img.icons8.com/external-prettycons-lineal-prettycons/50/000000/external-exit-essentials-prettycons-lineal-prettycons.png");
     logImgBtn.setAttribute( "alt", "log-out image");
 
 
