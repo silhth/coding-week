@@ -1,6 +1,9 @@
 import { c, q, a, eraseDivContent } from "./basicFunction.js"
-import { addTasks } from "./addTask.js";
-import { singInModale, signInUser, signIn } from "./logInOut.js"
+import { addTasks, addTaskBtn } from "./addTask.js";
+import { modale, signInUser, signInHtml } from "./logInOut.js"
+import { modaleHtmlDelete } from "./deleteListItem.js"
+import { searchItem } from "./search.js"
+
 // FUNZIONI
 // chiamata fetch e aggiunta del valore "priority"
 
@@ -13,9 +16,25 @@ const getToDoList = async () => {
         toDos.priority = nums;
         return toDos;
     });
+
+    // mostro i dati nelle diverse categorie
     filterPriority(toDoList);
-    filterCompleted();   
-    
+    // aggiunge la funzionalità al bottone "completed tasks"
+    filterCompleted();
+    // aggiunge la funzionalità al cerca
+    searchItem(toDoList, toDoListDiv)
+    // aggiunta nuovo appuntamento codice ====> addTask.js
+    addTaskBtn(btns, searchitems, toDoListDiv, toDoList)
+
+    // Modale d'accesso codice ==> logInOut.js
+
+    if (localStorage.length > 0) {
+        signInUser();
+    }
+    else {
+        modale(signInHtml());
+    }
+
 };
 
 
@@ -50,6 +69,7 @@ const render = (arr, container) => {
 
 
     arr.map((item) => {
+
         const toDo = a(toDoUl, c("li"));
         const checked = c("input");
         checked.setAttribute("type", "checkbox")
@@ -62,60 +82,39 @@ const render = (arr, container) => {
         a(toDo, checked);
 
         const deleteImg = a(toDo, c("img"))
-        deleteImg.setAttribute("src","https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/50/000000/external-trash-bin-cleaning-kiranshastry-lineal-kiranshastry.png" )
-        
-        
-        deleteImg.addEventListener('click', ()=> {
-            eraseDivContent(divModale)
-            const h2Sure = a(divModale, c("h2"))
-            h2Sure.textContent= "are you sere?"
-            const btnNo =a(divModale, c("button"))
-            btnNo.textContent = "NO"
-            const btnYes =a(divModale, c("button"))
-            btnYes.textContent = "YES"
-            singInModale()
-            console.log(btnYes)
-            console.log(divModale.innerHTML)
-            btnYes.addEventListener('click', () => {
+        deleteImg.setAttribute("src", "img/bin.png")
+        // deleteImg.setAttribute("src", "https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/50/000000/external-trash-bin-cleaning-kiranshastry-lineal-kiranshastry.png")
+        deleteImg.setAttribute("alt", "delete")
 
-                console.log("ciao")
-                const id = parseInt(item.id);
-                const doDoListRemove = toDoList.filter((item) => item.id !== id);
-                toDoList = doDoListRemove;
-                eraseDivContent(toDoListDiv)
-                filterPriority(doDoListRemove);
-                completedBtn.textContent = "SHOW ALL" ? completedBtn.textContent = "COMPLETED TASKS" : completedBtn.textContent = "COMPLETED TASKS"
-                project.style.filter = "blur(0px)";
-                modaleCredential.style.top = "-100%";
-                modaleUserPsw.style.top = "-100%"
-            })
-            btnNo.addEventListener("click", ()=> {
-                project.style.filter = "blur(0px)";
-                modaleCredential.style.top = "-100%";
-                modaleUserPsw.style.top = "-100%"
-            })
+        deleteImg.addEventListener('click', () => {
+            modale(modaleHtmlDelete(item, toDoList, toDoListDiv, completedBtn))
         })
-            
-    
+
     });
-
-
 
 }
 
 
-
 // aggiunge la funzionalità show/hide task completate.
 const filterCompleted = () => {
-    
+
+
     completedBtn.addEventListener("click", () => {
         const unchecked = document.querySelectorAll(".unchecked")
         unchecked.forEach((item) => {
             item.classList.toggle("hide")
         })
-        
-        unchecked[0].className === "unchecked hide" ? completedBtn.textContent = "SHOW ALL"
-        : completedBtn.textContent = "COMPLETED TASKS"
+
+        if (unchecked[0].className === "unchecked hide") {
+            addTask.style.display = "none";
+            searchitems.style.display = "none"
+            completedBtn.textContent = "SHOW ALL"
+        }
+        else {
+            addTask.style.display = "block";
+            searchitems.style.display = "block"
+            completedBtn.textContent = "COMPLETED TASKS"
+        }
     })
 
 }
@@ -123,42 +122,22 @@ const filterCompleted = () => {
 export { filterPriority, filterCompleted }
 
 
+
+
+
+
 // INIZIALIZZAZIONE VARIABILI 
-const divModale = q(".UserPsw")
+
 let toDoList = []
 const completedBtn = q(".completed");
 const toDoListDiv = q(".toDoList");
 const btns = q(".btns")
-const modaleCredential = q(".modaleCredential")
-const project = q(".project")
-const modaleUserPsw = q(".modaleUserPsw")
-// funzione per la crazione dell'app 
-document.addEventListener("DOMContentLoaded", () => {
-
-getToDoList();
-
-
-// aggiunta nuovo appuntamento codice ====> addTask.js
-
+const searchitems = q(".searchitems")
 const addTask = document.querySelector(".add")
 
-addTask.addEventListener('click', () => {
-    window.location.hash = "#add";
-    btns.style.display = "none";
-    addTasks(toDoListDiv, toDoList, btns);
-})
+// funzione per la crazione dell'app 
+document.addEventListener("DOMContentLoaded", getToDoList)
 
 
-// Modale d'accesso codice ==> logInOut.js
-
-if(localStorage.length>0){ 
-    signInUser(); }
-else {
-    singInModale();
-}
-
-signIn();
-
-});
 
 
