@@ -78,6 +78,7 @@ form button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;  
+    padding-bottom: 160px;
 }
 
 .toDoList ul {
@@ -358,7 +359,7 @@ form button {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     bottom:0;
     width: 100%;
     background: rgb(70, 70, 70);
