@@ -1,7 +1,7 @@
 import { c, q, a, eraseDivContent } from "./basicFunction.js"
 import { addTaskBtn } from "./addTask.js";
-import { modale, signInUser, signInHtml } from "./logInOut.js"
-import { modaleHtmlDelete } from "./deleteListItem.js"
+import { modale, signInUser, signInHtml, modaleOff } from "./logInOut.js"
+import { modaleHtmlDelete} from "./deleteListItem.js"
 import { searchItem } from "./search.js"
 
 // FUNZIONI
@@ -16,7 +16,6 @@ const getToDoList = async () => {
         toDos.priority = nums;
         return toDos;
     });
-
     // mostro i dati nelle diverse categorie
     filterPriority(toDoList);
     // aggiunge la funzionalità al bottone "completed tasks"
@@ -24,7 +23,7 @@ const getToDoList = async () => {
     // aggiunge la funzionalità al cerca
     searchItem(toDoList, toDoListDiv)
     // aggiunta nuovo appuntamento codice ====> addTask.js
-    addTaskBtn(btns, searchitems, toDoListDiv, toDoList)
+    addTaskBtn(btns, searchitems, toDoListDiv)
 
     // Modale d'accesso codice ==> logInOut.js
 
@@ -84,14 +83,28 @@ const render = (arr, container) => {
         const deleteImg = a(toDo, c("img"))
         deleteImg.setAttribute("src", "img/bin.png")
         deleteImg.setAttribute("alt", "delete")
-
+       
         deleteImg.addEventListener('click', () => {
-            modale(modaleHtmlDelete(item, toDoList, toDoListDiv, completedBtn))
-        })
+            modale(modaleHtmlDelete(item, toDoListDiv, completedBtn))
+       })
 
     });
 
 }
+
+//funzione per eliminare items dalla lista
+
+const eraseItem = (item, container, btn) => {   
+    
+    const id = parseInt(item.id);
+    const doDoListRemove = toDoList.filter((item) => item.id !== id);
+    toDoList = doDoListRemove;  
+    console.log(toDoList)
+    eraseDivContent(container)
+    filterPriority(toDoList);
+    btn.textContent = "SHOW ALL" ? btn.textContent = "COMPLETED TASKS" : btn.textContent = "COMPLETED TASKS"
+}
+
 
 
 // aggiunge la funzionalità show/hide task completate.
@@ -118,11 +131,6 @@ const filterCompleted = () => {
 
 }
 
-export { filterPriority, filterCompleted }
-
-
-
-
 
 
 // INIZIALIZZAZIONE VARIABILI 
@@ -134,9 +142,10 @@ const btns = q(".btns")
 const searchitems = q(".searchitems")
 const addTask = document.querySelector(".add")
 
+const divModale = q(".UserPsw")
+
 // funzione per la crazione dell'app 
 document.addEventListener("DOMContentLoaded", getToDoList)
 
 
-
-
+export { filterPriority, filterCompleted, eraseItem, toDoList }
