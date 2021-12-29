@@ -1,10 +1,26 @@
-import { c, a, eraseDivContent} from "./basicFunction.js"
-import { filterPriority } from "./script.js"
+import {c, q, a, eraseDivContent} from "./basicFunction.js"
+import { filterPriority, toDoList } from "./script.js"
+import { modale } from "./logInOut.js"
+import { modaleOff } from "./logInOut.js"
+
+const divModale = q(".UserPsw")
 
 
-const addTasks = (container, array, btns, searchBar) => {
+
+const addTasks = (container, btns, searchBar) => {
     eraseDivContent(container);
-   
+
+    const homeBtn = (event) => {
+        event.preventDefault()
+        modaleOff();
+        eraseDivContent(container);
+        window.location.hash = "";  
+        filterPriority(toDoList);
+        btns.style.display = "flex";
+        searchBar.style.display = "block";
+    
+    }
+
     // creo gli elementi nel div 
 
     const form = a(container, c("form"))
@@ -70,16 +86,50 @@ const addTasks = (container, array, btns, searchBar) => {
     const divBtns = a(form, c("div"))
     const btnSave = a(divBtns, c("button"))
     btnSave.setAttribute("type", "button")
-    btnSave.textContent= "save"
-    const btnBack = a(divBtns, c("button"))
-    btnBack.textContent= "home";
-    btnBack.setAttribute("class", "home")
+    btnSave.textContent= "save";
+
+    const btnBackHome = a(divBtns, c("button"))
+    btnBackHome.textContent= "home";
+    btnBackHome.setAttribute("class", "home")
+    btnBackHome.addEventListener("click", homeBtn)
+
+    // Creo la modale per l'agginta item
+
+    const modaleAddItem = () => {
+        eraseDivContent(divModale); 
+               
+        const h2Add = a(divModale, c("h2"))
+        h2Add.setAttribute('style', 'white-space: pre;');
+        h2Add.textContent = 'You added the task "' + inputText.value +'" \r\n\Do you want to add a new task?'
+    
+        const btnYes = a(divModale, c("button"))
+        btnYes.textContent = "YES"
+
+        const btnBack = a(divModale, c("button"))
+        btnBack.textContent= "home";
+        btnBack.setAttribute("class", "home")
+        
+
+        btnYes.addEventListener('click', () => {
+            modaleOff();
+            inputText.value = ""
+            inputName.value = ""
+            inputLastname.value = ""
+            inputAge.value = ""
+            
+        })
+
+        btnBack.addEventListener('click', homeBtn)
+    }
+
 
     // assegno la funzione ai bottoni
 
     btnSave.addEventListener('click', () =>{
+        const ids = toDoList.map((x)=>x.id)
+        const max = Math.max(...ids)
         let newTask = {
-            id: array.length + 1,
+            id: max + 1,
             name: inputName.value,
             lastname: inputLastname.value,
             age: inputAge.value,
@@ -87,29 +137,26 @@ const addTasks = (container, array, btns, searchBar) => {
             priority: selectLabel.value
 
         }
-        if (newTask.title && newTask.lastname && newTask.name) {array.unshift(newTask)}
+        if (newTask.title && newTask.lastname && newTask.name) {  
+            modale(modaleAddItem());
+            toDoList.unshift(newTask);
+        }
         else {alert("Please fill all the mandatory* fields")};
 
     })
 
-    btnBack.addEventListener('click', () =>{ 
-        eraseDivContent(container);
-        window.location.hash = "";  
-        filterPriority(array);
-        btns.style.display = "flex";
-        searchBar.style.display = "block";
-    });
 
 };
 
 const addTask = document.querySelector(".add")
 
-const addTaskBtn = (btns, searchBar, container, array) =>{
+const addTaskBtn = (btns, searchBar, container) =>{
+    
     addTask.addEventListener('click', () => {
         window.location.hash = "#add";
         btns.style.display = "none";
         searchBar.style.display = "none";
-        addTasks(container, array, btns, searchBar);
+        addTasks(container, btns, searchBar);
 })
 }
 
