@@ -1,18 +1,17 @@
 import { q, eraseDivContent} from "./basicFunction.js"
-import { filterPriority} from "./script.js"
+import { filterPriority,  toDoList} from "./script.js"
 
 const input = q('#search');
 
-const searchItem = (arr, container) => {
+const searchItem = (container) => {
 input.addEventListener('keyup', () => {
 
     const value = input.value.toLowerCase();
 
-    const results = arr.filter((item) =>
+    const results = toDoList.filter((item) =>
      item.title.toLowerCase().search(value) > -1)
     
     eraseDivContent(container)
-    console.log(arr)
     filterPriority(results);
 });
 }

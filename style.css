@@ -63,6 +63,7 @@ hr {
 
 .add, 
 .completed,
+.showAll,
 form button {
     display: block;
     margin: 20px auto;
@@ -71,6 +72,10 @@ form button {
     font-family: 'Amatic SC', cursive;
     font-size: 30px;
     cursor: pointer;
+}
+
+.showAll{
+    display: none;
 }
 
 
@@ -160,10 +165,6 @@ form button {
 .toDoList .checked {
     background: rgb(231, 231, 231);
 
-}
-
-.toDoList .hide {
-    display: none;
 }
 
 /* css addTask section */
@@ -388,6 +389,7 @@ footer {
     }
     .add, 
     .completed,
+    .showAll,
     form button {
         width: 100%;
         max-width: 100px;

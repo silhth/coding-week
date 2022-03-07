@@ -6,9 +6,9 @@ const divModale = q(".UserPsw")
 
 // funzione per eliminare un item dalla lista
 
-const btns = (item, container, btn, btnY, btnN) => {
+const btns = (item, container, btnY, btnN) => {
     btnY.addEventListener('click', () => {
-        eraseItem (item, container, btn);
+        eraseItem (item, container);
         modaleOff();
     })
 
@@ -18,9 +18,10 @@ const btns = (item, container, btn, btnY, btnN) => {
 
 }
 
+
 // riscrive la modale in Htlm per eliminare items dalla lista
 
-const modaleHtmlDelete = (item, container, btn) => {
+const modaleHtmlDelete = (item, container) => {
     eraseDivContent(divModale)
     const h2Sure = a(divModale, c("h2"))
     h2Sure.textContent = "are you sere?"
@@ -29,7 +30,7 @@ const modaleHtmlDelete = (item, container, btn) => {
     const btnYes = a(divModale, c("button"))
     btnYes.textContent = "YES"
 
-    btns(item, container, btn, btnYes, btnNo)
+    btns(item, container, btnYes, btnNo)
 
     
 }
