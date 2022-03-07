@@ -9,7 +9,7 @@ const divModale = q(".UserPsw")
 
 const addTasks = (container, btns, searchBar) => {
     eraseDivContent(container);
-
+    console.log(toDoList)
     const homeBtn = (event) => {
         event.preventDefault()
         modaleOff();
@@ -96,8 +96,7 @@ const addTasks = (container, btns, searchBar) => {
     // Creo la modale per l'agginta item
 
     const modaleAddItem = () => {
-        eraseDivContent(divModale); 
-               
+        eraseDivContent(divModale);               
         const h2Add = a(divModale, c("h2"))
         h2Add.setAttribute('style', 'white-space: pre;');
         h2Add.textContent = 'You added the task "' + inputText.value +'" \r\n\Do you want to add a new task?'
@@ -134,8 +133,8 @@ const addTasks = (container, btns, searchBar) => {
             lastname: inputLastname.value,
             age: inputAge.value,
             title: inputText.value,
-            priority: selectLabel.value
-
+            priority: selectLabel.value,
+            completed: false
         }
         if (newTask.title && newTask.lastname && newTask.name) {  
             modale(modaleAddItem());
@@ -144,8 +143,6 @@ const addTasks = (container, btns, searchBar) => {
         else {alert("Please fill all the mandatory* fields")};
 
     })
-
-
 };
 
 const addTask = document.querySelector(".add")

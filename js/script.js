@@ -1,6 +1,6 @@
 import { c, q, a, eraseDivContent } from "./basicFunction.js"
 import { addTaskBtn } from "./addTask.js";
-import { modale, signInUser, signInHtml, modaleOff } from "./logInOut.js"
+import { modale, signInUser, signInHtml } from "./logInOut.js"
 import { modaleHtmlDelete} from "./deleteListItem.js"
 import { searchItem } from "./search.js"
 
@@ -11,17 +11,19 @@ const getToDoList = async () => {
     eraseDivContent(toDoListDiv);
     const toDoListData = await fetch("https://jsonplaceholder.typicode.com/todos");
     const data = await toDoListData.json();
-    toDoList = data.map((toDos) => {
+    toDoListCompleted = data.map((toDos) => {
         const nums = parseInt(Math.random() * (6 - 0))
         toDos.priority = nums;
         return toDos;
     });
+    toDoList = toDoListCompleted
     // mostro i dati nelle diverse categorie
     filterPriority(toDoList);
     // aggiunge la funzionalità al bottone "completed tasks"
     filterCompleted();
+    showAllTask();
     // aggiunge la funzionalità al cerca
-    searchItem(toDoList, toDoListDiv)
+    searchItem(toDoListDiv)
     // aggiunta nuovo appuntamento codice ====> addTask.js
     addTaskBtn(btns, searchitems, toDoListDiv)
 
@@ -65,17 +67,18 @@ const render = (arr, container) => {
     const title = a(toDoUl, c("h2"))
     title.textContent = container
     const hr = a(title, c("hr"))
-
-
     arr.map((item) => {
 
         const toDo = a(toDoUl, c("li"));
         const checked = c("input");
+        checked.addEventListener('change', () => 
+             item.completed === true ? item.completed = false : item.completed = true)
         checked.setAttribute("type", "checkbox")
         if (item.completed === true) {
             checked.setAttribute("checked", true);
-            toDo.setAttribute("class", "checked")
+            toDo.setAttribute("class", "checked")      
         }
+        
         else { toDo.setAttribute("class", "unchecked") }
         toDo.textContent = item.title;
         a(toDo, checked);
@@ -85,7 +88,8 @@ const render = (arr, container) => {
         deleteImg.setAttribute("alt", "delete")
        
         deleteImg.addEventListener('click', () => {
-            modale(modaleHtmlDelete(item, toDoListDiv, completedBtn))
+            console.log(arr)
+            modale(modaleHtmlDelete(item, toDoListDiv))
        })
 
     });
@@ -94,55 +98,56 @@ const render = (arr, container) => {
 
 //funzione per eliminare items dalla lista
 
-const eraseItem = (item, container, btn) => {   
-    
+const eraseItem = (item, container) => {   
     const id = parseInt(item.id);
     const doDoListRemove = toDoList.filter((item) => item.id !== id);
     toDoList = doDoListRemove;  
-    console.log(toDoList)
     eraseDivContent(container)
     filterPriority(toDoList);
-    btn.textContent = "SHOW ALL" ? btn.textContent = "COMPLETED TASKS" : btn.textContent = "COMPLETED TASKS"
 }
 
 
 
 // aggiunge la funzionalità show/hide task completate.
 const filterCompleted = () => {
+    
+    completedBtn.addEventListener("click", () => { 
+        eraseDivContent(toDoListDiv)
+        const arrCompleted = toDoList.filter((item) => item.completed ===true);
+        toDoList=arrCompleted
+        filterPriority(toDoList)
+        showAll.style.display = "block";
+        completedBtn.style.display = "none";
+        add.style.display = "none";
+    })}
 
 
-    completedBtn.addEventListener("click", () => {
-        const unchecked = document.querySelectorAll(".unchecked")
-        unchecked.forEach((item) => {
-            item.classList.toggle("hide")
-        })
+const showAllTask = () => {
+    
+    showAll.addEventListener("click", () => {       
+                eraseDivContent(toDoListDiv)
+                toDoList=toDoListCompleted
+                filterPriority(toDoList)    
+                showAll.style.display = "none";
+                completedBtn.style.display = "block";
+                add.style.display = "block";
+            })}
 
-        if (unchecked[0].className === "unchecked hide") {
-            addTask.style.display = "none";
-            searchitems.style.display = "none"
-            completedBtn.textContent = "SHOW ALL"
-        }
-        else {
-            addTask.style.display = "block";
-            searchitems.style.display = "block"
-            completedBtn.textContent = "COMPLETED TASKS"
-        }
-    })
-
-}
+//item checked
 
 
 
 // INIZIALIZZAZIONE VARIABILI 
-
+let toDoListCompleted =[]
 let toDoList = []
 const completedBtn = q(".completed");
 const toDoListDiv = q(".toDoList");
 const btns = q(".btns")
 const searchitems = q(".searchitems")
-const addTask = document.querySelector(".add")
+const showAll= q(".showAll")
+const add = q(".add")
+const higherP = q(".higher-priority")
 
-const divModale = q(".UserPsw")
 
 // funzione per la crazione dell'app 
 document.addEventListener("DOMContentLoaded", getToDoList)
