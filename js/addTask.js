@@ -5,8 +5,6 @@ import { modaleOff } from "./logInOut.js"
 
 const divModale = q(".UserPsw")
 
-
-
 const addTasks = (container, btns, searchBar) => {
     eraseDivContent(container);
     console.log(toDoList)
